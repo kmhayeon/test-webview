@@ -7,6 +7,7 @@ import logoGide from '@static/images/icon_next_purple.png';
 import iconSubtract1 from '@static/images/icon_subtract1.png';
 import iconSubtract2 from '@static/images/icon_subtract2.png';
 import iconSubtract3 from '@static/images/icon_subtract3.png';
+import { useRouter } from 'next/dist/client/router';
 
 
 const Container = styled.div`
@@ -131,8 +132,13 @@ const FundTitle = styled.div`
 
 
 const TransactionInfo = () => {
+  const router = useRouter();
   const handleClick = () => {
     console.log('Click');
+  };
+
+  const goInvestmentInfo = () => {
+    router.push('/InvestmentInfo');
   };
 
   return (
@@ -229,14 +235,14 @@ const TransactionInfo = () => {
         </InnerWrap>
       </ContentsWrap>
       <ContentsWrap style={{ height: 200 }}>
-        <ServiceMenuTitle onClick={() => handleClick()}>
+        <ServiceMenuTitle onClick={() => goInvestmentInfo()}>
           투자 관련문서
           <Image className='next-icon' src={iconNextBig.src}
                  alt={'iconNext'} width={24} height={24} />
         </ServiceMenuTitle>
         <BasicButton
           theme={BasicButtonTheme.BlackRounded}
-          onClick={() => handleClick()}
+          onClick={() => handleClick}
           style={{ width: '100%', marginTop: 35, fontSize: '16px' }}
         >
           펀드 정보 보러가기

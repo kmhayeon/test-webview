@@ -6,6 +6,14 @@ import iconNextBig from '@static/images/icon_next_big.png';
 import iconSubtract1 from '@static/images/icon_subtract1.png';
 import iconSubtract2 from '@static/images/icon_subtract2.png';
 import iconSubtract3 from '@static/images/icon_subtract3.png';
+import SubscriptionNoti from '@pages/SubscriptionNoti';
+import CollusionBenefit from '@pages/CollusionBenefit';
+
+
+
+{/*청약 신청 버튼을 누르고 신청이 되었을 경우*/}
+//93vh
+
 
 const Container = styled.div`
   width: 100%;
@@ -38,6 +46,26 @@ const ServiceMenuTitle = styled.div`
   font-weight: 500;
   font-size: 18px;
   color: #000000;
+`;
+
+const CencelButton = styled.div`
+  margin-left: auto;
+  font-size: 14px;
+  color: #CE4B4B;
+`;
+
+const PercentageText = styled.div`
+  padding: 20px 0px 15px 0px;
+  font-weight: 400;
+  font-size: 22px;
+  color: #FFB601;
+  
+  span{
+    padding-left: 2px;
+    color: #727272;
+    font-weight: 400;
+    font-size: 14px;
+  }
 `;
 
 const BuildingInfo = styled.div`
@@ -93,14 +121,83 @@ const InnerImageBox = styled.div`
 
 
 const SubscriptionInfo  = ({}) => {
+  const router = useRouter();
 
   const handleClick = () => {
     console.log('Click');
   };
 
+  const goCollusionBenefit = () => {
+    router.push('/CollusionBenefit');
+  };
+
+  const goSubscriptionNoti = () => {
+    router.push('/SubscriptionNoti');
+  };
+
+  const goInvestmentInfo = () => {
+    router.push('/InvestmentInfo');
+  };
+
+  const goToOrderFailResult = () => {
+    router.push('/OrderFailResult');
+  };
+
+
   return (
       <Container>
-        <ServiceCenterWrap style={{ height: 370 }}>
+        {/*청약 신청 버튼을 누르고 신청이 되었을 경우*/}
+        <ServiceCenterWrap style={{ height: 300 }}>
+          <div style={{ display: 'flex'}}>
+          <ServiceMenuTitle onClick={() => handleClick()}>
+            내 체결 내역
+          </ServiceMenuTitle>
+          <CencelButton onClick={()=> goToOrderFailResult()}>취소하기</CencelButton>
+          </div>
+          <BuildingInfo>
+            <BuildingTitle>청약 상품명</BuildingTitle>
+              <BuildingSub>해운대 엘시티</BuildingSub>
+          </BuildingInfo>
+          <BuildingInfoNone>
+            <BuildingTitle>청약 수량</BuildingTitle>
+            <BuildingSub>10개</BuildingSub>
+          </BuildingInfoNone>
+          <BuildingInfo style={{marginTop:0}}>
+            <BuildingTitle>청약 금액</BuildingTitle>
+            <BuildingSub>50,000원</BuildingSub>
+          </BuildingInfo>
+        </ServiceCenterWrap>
+
+        {/*청약 신청 버튼을 누르기 전의 경우*/}
+        <ServiceCenterWrap style={{ height: 350, marginTop: 12 }}>
+          <ServiceMenuTitle onClick={() => handleClick()}>
+            청약 정보
+          </ServiceMenuTitle>
+          <PercentageText>64% <span>진행 중</span></PercentageText>
+          <BuildingInfo style={{ marginTop: 0, height: 81 }}>
+            <BuildingTitle>청약일정</BuildingTitle>
+            <div>
+              <BuildingSub>
+                청약시작 : 2022.08.22
+                <br />
+                <span style={{
+                  marginLeft: 5, marginTop: 16, position: 'relative', top: 8,
+                }}>청약마감 : 2022.12.22</span>
+              </BuildingSub>
+            </div>
+          </BuildingInfo>
+          <BuildingInfoNone>
+            <BuildingTitle>공모가</BuildingTitle>
+            <BuildingSub>5,000원</BuildingSub>
+          </BuildingInfoNone>
+          <BuildingInfo style={{marginTop:0}}>
+            <BuildingTitle>청약현황</BuildingTitle>
+            <BuildingSub>19.3억 <span style={{color:'#727272'}}>/ 31억</span></BuildingSub>
+          </BuildingInfo>
+        </ServiceCenterWrap>
+
+
+        <ServiceCenterWrap style={{ height: 370, marginTop: 12 }}>
           <ServiceMenuTitle onClick={() => handleClick()}>
             부동산 정보
           </ServiceMenuTitle>
@@ -168,22 +265,22 @@ const SubscriptionInfo  = ({}) => {
           </InnerWrap>
         </ServiceCenterWrap>
         <ServiceCenterWrap style={{ height: 90, marginTop: 12 }}>
-          <ServiceMenuTitle style={{marginTop:7}} onClick={() => handleClick()}>
-            공모 혜택
+          <ServiceMenuTitle style={{marginTop:7}} onClick={() => goCollusionBenefit()}>
+            청약 혜택
             <Image className='next-icon' src={iconNextBig.src}
                    alt={'icon-next'} width={24} height={24} />
           </ServiceMenuTitle>
         </ServiceCenterWrap>
         <ServiceCenterWrap style={{ height: 90, marginTop: 12 }}>
-          <ServiceMenuTitle style={{marginTop:7}} onClick={() => handleClick()}>
+          <ServiceMenuTitle style={{marginTop:7}} onClick={() => goSubscriptionNoti()}>
             청약 유의사항
             <Image className='next-icon' src={iconNextBig.src}
                    alt={'icon-next'} width={24} height={24} />
           </ServiceMenuTitle>
         </ServiceCenterWrap>
-        <ServiceCenterWrap style={{ height: 90, marginTop: 12, marginBottom: 40}}>
-          <ServiceMenuTitle style={{marginTop:7}} onClick={() => handleClick()}>
-            투자 관련문서
+        <ServiceCenterWrap style={{ height: 90, marginTop: 12, marginBottom: 80}}>
+          <ServiceMenuTitle style={{marginTop:7}} onClick={() => goInvestmentInfo()}>
+            투자관련 문서
             <Image className='next-icon' src={iconNextBig.src}
                    alt={'icon-next'} width={24} height={24} />
           </ServiceMenuTitle>

@@ -88,7 +88,7 @@ const BuildingInfoNoClolr = styled.div`
   margin-left: auto;
 `;
 
-const PurchaseConfirmation = ({}) => {
+const BuyConfirmation = ({}) => {
 
   const router = useRouter();
 
@@ -101,16 +101,16 @@ const PurchaseConfirmation = ({}) => {
   };
 
   const goToPurchaseRequest = () => {
-    router.push('/PurchaseRequest');
+    router.push('/BuyRequest');
   };
 
 
   return (
     <Container>
-      <BackNavBasic title={'구매 확정'} onClick={() => goToPurchaseRequest()}/>
+      <BackNavBasic title={'매수 주문 확정'} onClick={() => goToPurchaseRequest()}/>
       <ContentsWrap style={{ height: 250 }}>
         <ResultTitle>
-          구매신청이 완료되었습니다.
+          매수 주문이 완료되었습니다.
         </ResultTitle>
         <CheckImageBox>
           <Image src={illustCompleted2.src} alt={'illustration2_completed'} width={100} height={100} />
@@ -158,4 +158,4 @@ const PurchaseConfirmation = ({}) => {
   );
 };
 
-export default PurchaseConfirmation;
+export default BuyConfirmation;

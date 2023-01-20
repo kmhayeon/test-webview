@@ -122,7 +122,7 @@ const BuildingInfoNone = styled.div`
   margin-left: auto;
 `;
 
-const PurchaseRequest = ({}) => {
+const BuyRequest = ({}) => {
 
   const router = useRouter();
   const [counter, setCounter] = React.useState(0);
@@ -136,7 +136,7 @@ const PurchaseRequest = ({}) => {
   };
 
   const goToPurchaseConfirmation = () => {
-    router.push('/PurchaseConfirmation');
+    router.push('/BuyConfirmation');
   };
 
   return (
@@ -144,7 +144,7 @@ const PurchaseRequest = ({}) => {
       <BackNavBasic title={'매수 주문'} onClick={() => goToTransactionHome()} />
       <ServiceCenterWrap>
         <ServiceMenuTitle onClick={() => handleClick()}>
-          구매신청
+          매수 신청
         </ServiceMenuTitle>
         <ServiceMenuSub>
           해운대 엘시티
@@ -188,7 +188,7 @@ const PurchaseRequest = ({}) => {
         <BasicButton
           theme={BasicButtonTheme.BlackRounded}
           onClick={() => goToPurchaseConfirmation()}
-          style={{ width: '100%', marginTop: '28px', fontSize:'16px' }}
+          style={{ width: '100%', marginTop: '28px', fontSize:'16px', background: '#CE4B4B' }}
         >
           매수 주문하기
         </BasicButton>
@@ -197,4 +197,7 @@ const PurchaseRequest = ({}) => {
   );
 };
 
-export default PurchaseRequest;
+export default BuyRequest;
+
+// BuyRequest 구매 매수
+// SellRequest 판매 매도

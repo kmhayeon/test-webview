@@ -52,12 +52,6 @@ export const BasicInput: React.FC<IBasicInputProps> = forwardRef((props, ref: an
 
   const [showFocus, setShowFocus] = React.useState(true);
 
-
-  const fn = classNames('fn-input', cnProps);
-  const fnWrapper = classNames('fn-input-wrapper', {
-    disabled: cnProps.disabled,
-  });
-
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     onChangeRaw?.(e);
     // @ts-ignore
@@ -70,10 +64,14 @@ export const BasicInput: React.FC<IBasicInputProps> = forwardRef((props, ref: an
       e.preventDefault();
     }
   };
-
   const handleFocus = (showFocus: React.FocusEvent<HTMLInputElement>) => {
     setShowFocus(!showFocus);
   };
+
+  const fn = classNames('fn-input', cnProps);
+  const fnWrapper = classNames('fn-input-wrapper', {
+    disabled: cnProps.disabled,
+  });
 
 
   return (

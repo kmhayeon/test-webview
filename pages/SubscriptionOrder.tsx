@@ -131,7 +131,8 @@ const NotiWrap = styled.div`
 
 const SubscriptionOrder= ({}) => {
   const router = useRouter();
-  const [count, setCount] = React.useState<number | string>('');
+  const [count, setCount] = React.useState<number>(0);
+  const [totalPrice, setTotalPrice] = React.useState<number>(5000);
   const [disabled, setDisabled] = React.useState(false);
 
   const goToMain = () => {
@@ -146,6 +147,9 @@ const SubscriptionOrder= ({}) => {
   };
 
   const onClickPlusCounter = (num: number) => {
+    if( num >= 10) {
+      return console.log('10개 이상으로는 입력할 수 없습니다.');
+    }
     setCount(num + 1);
   };
 
@@ -213,7 +217,7 @@ const SubscriptionOrder= ({}) => {
             최종금액
           </ServiceMenuTitle>
           <ServiceMenuTitle style={{ marginLeft: 'auto' }}>
-            50,050원
+            {(totalPrice * count + ((totalPrice * 0.01))).toLocaleString('en')}원
           </ServiceMenuTitle>
         </CountWrap>
         <NotiWrap style={{ height: '300px' }}>

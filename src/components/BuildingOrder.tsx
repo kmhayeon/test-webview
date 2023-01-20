@@ -346,12 +346,12 @@ const BuildingOrder = () => {
   };
 
   const goToBuyOrder = () => {
-    router.push('/PurchaseRequest');
+    router.push('/BuyRequest');
   };
 
 
-  const goToSubscriptionOrder = () => {
-    router.push('/');
+  const goToSellOrder = () => {
+    router.push('/SellRequest');
   };
 
   return (
@@ -512,7 +512,7 @@ const BuildingOrder = () => {
           initialFocusRef={focusRef}
           defaultSnap={({ minHeight }) => minHeight}
           snapPoints={({ maxHeight }) => [
-            maxHeight - maxHeight / 1.7,
+            maxHeight - maxHeight / 1.65,
             maxHeight / 14,
           ]}
           blocking={false}
@@ -541,7 +541,7 @@ const BuildingOrder = () => {
                   color: '#727272',
                 }}>매도가능수량
                 </div>
-                <div style={{ marginLeft: 'auto', fontSize: 20 }}>200개</div>
+                <div style={{ marginLeft: 'auto', fontSize: 20 }}>100개</div>
               </div>
               <div>
                 <div style={{ display: 'flex', marginTop: 18 }}>
@@ -607,9 +607,9 @@ const BuildingOrder = () => {
                 </div>
                 <BasicButtonBox style={{ width: '100%', height: '100px' }}>
                   <BasicButton
-                    disabled={disabled}
+                    disabled={false}
                     theme={BasicButtonTheme.SuccesRounded}
-                    onClick={() => goToSubscriptionOrder()}
+                    onClick={() => goToSellOrder()}
                     style={{ width: '100%' }}>매도 주문하기</BasicButton>
                 </BasicButtonBox>
               </div>
@@ -619,9 +619,9 @@ const BuildingOrder = () => {
                 <div style={{
                   marginTop: 2, marginRight: 'auto', fontSize: 16,
                   color: '#727272',
-                }}>매도가능수량
+                }}>매수가능금액
                 </div>
-                <div style={{ marginLeft: 'auto', fontSize: 20 }}>100개</div>
+                <div style={{ marginLeft: 'auto', fontSize: 20 }}>50,000원</div>
               </div>
               <div>
                 <div style={{ display: 'flex', marginTop: 18 }}>

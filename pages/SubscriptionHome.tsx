@@ -150,15 +150,17 @@ const SubscriptionHome: React.FC<ISubscriptionHomeProps> = ({
         <TabPanel value={value} index={1}>
           <SubscriptionDetailInfo />
         </TabPanel>
+        {/*청약 신청 버튼을 누르기 전의 경우에 존재함*/}
         <ButtonBox>
           <BasicButton
             theme={result !== true ? BasicButtonTheme.SuccesRounded : BasicButtonTheme.FailRounded }
             onClick={() => goToSubscriptionOrder()}
             style={{ width: '100%', marginTop: 4 }}
           >
-            {
-              result !== true ? '청약 신청하기' : '청약 취소하기'
-            }
+            {/*{*/}
+            {/*  result !== true ? '청약 신청하기' : '청약 취소하기'*/}
+            {/*}*/}
+            청약 신청하기
           </BasicButton>
         </ButtonBox>
       </TabContainer>

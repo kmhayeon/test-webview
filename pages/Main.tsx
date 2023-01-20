@@ -242,7 +242,6 @@ const FooterSub = styled.div`
 const ButtonStyle = {
   width: '160px',
   height: '48px',
-  marginLeft: '10px',
   marginTop: '28px',
   fontSize: '16px',
   fontWeight: '600',
@@ -250,6 +249,16 @@ const ButtonStyle = {
 };
 
 const ButtonStyle2 = {
+  width: '160px',
+  height: '48px',
+  marginLeft: '10px',
+  marginTop: '28px',
+  fontSize: '16px',
+  fontWeight: '600',
+  padding: '0',
+};
+
+const ButtonStyle3 = {
   width: '122px',
   height: '32px',
   padding: '0',
@@ -301,7 +310,7 @@ const Main = () => {
         <AssetInfoWrap>
           <AssetInfoTitle>안전추구형</AssetInfoTitle>
           <AssetInfoSubtitle>조영훈 님의 자산</AssetInfoSubtitle>
-          <AssetInfoDes>200,000<span> 원</span></AssetInfoDes>
+          <AssetInfoDes>250,000<span> 원</span></AssetInfoDes>
         </AssetInfoWrap>
         <AccountInfoWrap>
           <AccountTextBox>
@@ -316,7 +325,7 @@ const Main = () => {
               입금
             </BasicButton>
             <BasicButton
-              style={ButtonStyle}
+              style={ButtonStyle2}
               theme={BasicButtonTheme.WhiteRounded}
               onClick={() => handleClick()}
             >
@@ -343,7 +352,7 @@ const Main = () => {
                   <BuildingName>해운대 엘시티</BuildingName>
                   <TransactionRight>
                     <BasicButton
-                      style={ButtonStyle2}
+                      style={ButtonStyle3}
                       theme={BasicButtonTheme.GreyRounded}
                       onClick={() => handleClick()}
                     >

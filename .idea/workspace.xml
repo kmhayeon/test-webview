@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a24044c1-5644-477a-867f-89d651bffcdf" name="Default Changelist" comment="" />
+    <list default="true" id="a24044c1-5644-477a-867f-89d651bffcdf" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/pages/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/Main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/PurchaseConfirmation.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/PurchaseRequest.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/SubscriptionHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/SubscriptionHome.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/SubscriptionOrder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/SubscriptionOrder.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/TransactionHome/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/TransactionHome/styles.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BuildingOrder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BuildingOrder.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SubscriptionInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SubscriptionInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TransactionInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TransactionInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/BasicInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/BasicInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/setupTests.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,6 +63,7 @@
       <workItem from="1674173594088" duration="94000" />
       <workItem from="1674173698665" duration="199000" />
       <workItem from="1674174291525" duration="1352000" />
+      <workItem from="1674175938170" duration="301000" />
     </task>
     <servers />
   </component>
