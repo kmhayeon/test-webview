@@ -1,0 +1,42 @@
+const theme = {
+  // 컬러
+  MAIN_BLUE: '#0a7b95',
+  MAIN_LIGHT_BLUE: '#5b83fc',
+  RED: '#FC5B5B',
+  LIGHT_RED: '#ff6464',
+  WHITE: '#FFFFFF',
+  WHITE_DE: '#DEDEDE',
+  VERY_LIGHT_GRAY: '#FAFAFA',
+  LIGHT_GRAY: '#DDDDDD',
+  LIGHT_GRAY2: '#959595',
+  MEDIUM_GRAY: '#C9C9C9',
+  DARK_GRAY: '#848484',
+  VERY_DARK_GRAY: '#848484',
+  BROWNISH_GRAY: '#676767',
+  BLACK: '#000000',
+  BLACK_TWO: '#393939',
+  MAIN_YELLOW: '#FFB500',
+  MAIN_YELLOW2: '#FFB600',
+  BG_GRAY: '#F5F5F5',
+  GRAY_4D: '#4D4D4D',
+  GRAY_D1: '#D1D1D1',
+  GRAY_DA: '#DADADA',
+  GRAY_AD: '#ADADAD',
+  GRAY_F5: '#F5F6F8',
+  GRAY_72: '#727272',
+  BLUE_SUCCES: '#3C4BCD',
+  RED_FAIL: '#CE4B4B',
+  // 폰트
+  HEADER: '92px',
+  HEADLINE: '36px',
+  TITLE: '40px',
+  LARGE_BODY: '20px',
+  BODY: '24px',
+  SECONDARY_BODY: '18px',
+  THIRD_BODY: '13px',
+  BTN: '17px',
+};
+
+export default theme;
+
+//${({theme}) => theme.GRAY_72};
