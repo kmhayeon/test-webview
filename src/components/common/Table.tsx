@@ -23,7 +23,7 @@ const TableMain = styled.table`
   background-color: white;
   width: 100%;
   overflow: auto;
-  margin-top: 48px;
+  margin-top: 90px;
 `;
 
 const TableBody = styled.tbody`

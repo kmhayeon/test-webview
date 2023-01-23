@@ -8,8 +8,6 @@ import BuildingOrder from '@components/BuildingOrder';
 import MarketPrice from '@components/MarketPrice';
 import TransactionInfo from '@components/TransactionInfo';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import SubscriptionInfo from '@components/SubscriptionInfo';
-import SubscriptionDetailInfo from '@components/SubscriptionDetailInfo';
 
 const Container = styled.div`
   width: 100%;
@@ -88,13 +86,12 @@ const TransactionHome = () => {
           <Image className='icon_up' src={iconUp.src} alt={'iconUp'} width={10} height={10} />
         </div>
       </NavSubInfo>
+      <div>
       <TabWrap>
         <Nav variant='tabs'
              defaultactivekey='link-0'
              justified
-             style={{ position: 'fixed', width: '100%', zIndex: '120', background: 'white',
-             borderBottom:'1px solid rgba(0, 0, 0, 0.04)'
-             }}
+             style={{ position: 'fixed', width: '100%', zIndex: '120', background: 'white', borderBottom:'1px solid rgba(0, 0, 0, 0.04)' }}
         >
           <NavItem>
             <NavLink eventkey='link-0' onClick={() => handleChange(0)} className={'nav-link'}
@@ -115,18 +112,19 @@ const TransactionHome = () => {
             </NavLink>
           </NavItem>
         </Nav>
-        <TabContent activeTab={String(tab)}>
-          <TabPane tabId='0'>
-            <BuildingOrder />
-          </TabPane>
-          <TabPane tabId='1'>
-            <MarketPrice />
-          </TabPane>
-          <TabPane tabId='2'>
-            <TransactionInfo />
-          </TabPane>
-        </TabContent>
       </TabWrap>
+      <TabContent activeTab={String(tab)}>
+        <TabPane tabId='0'>
+          <BuildingOrder />
+        </TabPane>
+        <TabPane tabId='1'>
+          <MarketPrice />
+        </TabPane>
+        <TabPane tabId='2'>
+          <TransactionInfo />
+        </TabPane>
+      </TabContent>
+      </div>
     </Container>
   );
 };

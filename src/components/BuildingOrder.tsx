@@ -11,9 +11,6 @@ import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 import { FakeMockNoOrderData, FakeMockOrderData } from '../../makeMock';
 import { BasicInput } from '@components/common/BasicInput';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import SubscriptionInfo from '@components/SubscriptionInfo';
-import SubscriptionDetailInfo from '@components/SubscriptionDetailInfo';
-
 
 export interface TEST_DATA {
   price: number,
@@ -461,6 +458,7 @@ const BuildingOrder = () => {
       </div>
 
 
+
       <div>
         <BottomSheet
           open={open}
@@ -500,7 +498,6 @@ const BuildingOrder = () => {
               </NavItem>
             </Nav>
           </BottomSheetWrap>
-
           <TabContent activeTab={String(tab2)} style={{ padding: '21px 28px' }}>
             <TabPane tabId='0'>
               <div style={{ display: 'flex' }}>

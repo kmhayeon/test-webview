@@ -1,4 +1,4 @@
-import React,{useRef, useState, useEffect} from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useRouter } from 'next/dist/client/router';
 import Image from 'next/image';
 import styled from 'styled-components';
@@ -8,6 +8,9 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import ByDay from '@components/ByDay';
 import ByRealTime from '@components/ByRealTime';
+import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
+import SubscriptionInfo from '@components/SubscriptionInfo';
+import SubscriptionDetailInfo from '@components/SubscriptionDetailInfo';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -34,7 +37,7 @@ const RowTitleBox = styled.div`
   color: #727272;
   font-size: 14px;
   border-bottom: 1.2px solid #DEDEDE;
-  margin-top:-1px;
+  margin-top: 42px;
 `;
 
 const RowTitle = styled.div`
@@ -44,27 +47,49 @@ const RowTitle = styled.div`
 
 const RowRealTimeHeader = styled.div`
   width: 100%;
-  height: 75vh;
-  overflow: auto;
+  //height: 75vh;
+  overflow-y: scroll;
 `;
 
+
 const NoDataWrap = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 230%;
-  transform: translate(-50%, -50%);
+  position: fixed;
+  display: flex;
+  width: 100%;
+  height: 48px;
+  padding: 13px;
+  margin-top: 42px;
+  justify-content: center;
   text-align: center;
+  top: 44%;
+
 
   div {
     font-weight: 400;
     font-size: 16px;
     color: #727272;
-    width: 300px;
-    padding-top: 24px;
+    margin-top: 20px;
   }
 `;
 
 const TabWrap = styled.div`
+  width: 100%;
+  font-size: 15px;
+
+  .text-link.nav-link.active {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  .active.nav-link:after {
+    border-bottom: 0px !important;
+  }
+
+  .nav-link {
+    background: #F5F6F8;
+    color: rgb(202, 202, 202) !important;
+    padding: 13px 20px !important;
+  }
 `;
 
 const TabsBox = styled(Tabs)({
@@ -112,15 +137,15 @@ function TabPanel(props: TabPanelProps) {
 }
 
 
-
 const MarketPrice = () => {
   const router = useRouter();
-  const [height, setHeight] = useState(0)
+  const [height, setHeight] = useState(0);
   const [value, setValue] = React.useState(0);
-  const ref = useRef<any>(null)
+  const ref = useRef<any>(null);
+  const [tab, setTab] = React.useState<number | string>(0);
 
-  const handleChange = (event: any, newValue: any) => {
-    setValue(newValue);
+  const handleChange = (newValue: any) => {
+    setTab(newValue);
   };
 
 
@@ -132,41 +157,61 @@ const MarketPrice = () => {
     <Container>
       <div style={{ paddingTop: 53 }}>
         <TabWrap>
-          <TabsBox
-            value={value} onChange={handleChange}
-            aria-label='Main Tabs' variant='fullWidth'>
-            <TabsItem disableRipple label='일별' />
-            <TabsItem disableRipple label='실시간' />
-          </TabsBox>
-        </TabWrap>
-        <TabPanel value={value} index={0}>
-            <RowDayHeader>
-            <RowTitleBox>
-              <RowTitle style={{ marginLeft: 5 }}>일자</RowTitle>
-              <RowTitle style={{ marginLeft: 2 }}>평균거래량</RowTitle>
-              <RowTitle>등락폭</RowTitle>
-              <RowTitle>거래량</RowTitle>
-            </RowTitleBox>
-            <ByDay />
-          </RowDayHeader>
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <>
-            <RowRealTimeHeader>
-              <RowTitleBox>
+          <Nav variant='tabs'
+               defaultactivekey='link-0'
+               justified
+               style={{
+                 position: 'fixed', width: '100%', background: 'white',
+                 borderBottom: '1px solid rgba(0, 0, 0, 0.04)',
+               }}
+          >
+            <NavItem>
+              <NavLink eventkey='link-0' onClick={() => handleChange(0)}
+                       className={'text-link'}
+                       active={tab === 0 ? true : false}>
+                일별
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink eventkey='link-1' onClick={() => handleChange(1)}
+                       className={'text-link'}
+                       active={tab === 1 ? true : false}>
+                실시간
+              </NavLink>
+            </NavItem>
+          </Nav>
+          <TabContent activeTab={String(tab)}>
+            <TabPane tabId='0'>
+              <RowDayHeader>
+                <RowTitleBox>
+                  <RowTitle style={{ marginLeft: 5 }}>일자</RowTitle>
+                  <RowTitle style={{ marginLeft: 2 }}>평균거래량</RowTitle>
+                  <RowTitle>등락폭</RowTitle>
+                  <RowTitle>거래량</RowTitle>
+                </RowTitleBox>
+                <ByDay />
+              </RowDayHeader>
+            </TabPane>
+
+            <TabPane tabId='1'>
+                <RowRealTimeHeader>
+                <RowTitleBox>
                 <RowTitle style={{ marginLeft: '-18px' }}>시간</RowTitle>
                 <RowTitle style={{ marginLeft: 2 }}>평균거래량</RowTitle>
                 <RowTitle>등락폭</RowTitle>
                 <RowTitle>거래량</RowTitle>
-              </RowTitleBox>
-              <ByRealTime />
-            </RowRealTimeHeader>
-            {/*<NoDataWrap>*/}
-            {/*    <Image src={iconWarning.src} alt={'iconWarning'} width={28} height={28} />*/}
-            {/*  <div>금일 시세를 확인할 내역이 없습니다.</div>*/}
-            {/*</NoDataWrap>*/}
-          </>
-        </TabPanel>
+                </RowTitleBox>
+                <ByRealTime />
+                </RowRealTimeHeader>
+                {/*<NoDataWrap>*/}
+                {/*  <div>*/}
+                {/*    <Image src={iconWarning.src} alt={'iconWarning'} width={28} height={28} />*/}
+                {/*    <div>금일 시세를 확인할 내역이 없습니다.</div>*/}
+                {/*  </div>*/}
+                {/*</NoDataWrap>*/}
+            </TabPane>
+          </TabContent>
+        </TabWrap>
       </div>
     </Container>
   );
