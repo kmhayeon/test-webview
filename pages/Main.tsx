@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/dist/client/router';
 import styled from 'styled-components';
 import logoHorison from '@static/images/logo_horison.png';
-import iconAlert from '@static/images/Icon_alert.png';
+import iconAlert from '@static/images/icon_alert.png';
 import iconPerson from '@static/images/icon_person.png';
 import iconNextPurple from '@static/images/icon_next_purple.png';
 import iconDown from '@static/images/icon_down.png';
@@ -14,7 +14,8 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   position: relative;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   font-family: 'Pretendard';
 `;
 
@@ -33,6 +34,10 @@ const NavBasic = styled.div`
 
   .person {
     float: left;
+  }
+
+  .person2 {
+    float: right;
   }
 
   .alert {
@@ -304,7 +309,7 @@ const Main = () => {
                  width={24} height={24} onClick={() => goToUserMyInfo()} />
           <Image src={logoHorison.src} alt={'iconHorison'} className='logo'
                  width={104} height={30} />
-          <Image src={iconAlert.src} alt={'iconAlert'} className='alert'
+          <Image src={iconAlert.src} alt={'iconAlert'} className='person2'
                  width={24} height={24} />
         </NavBasic>
         <AssetInfoWrap>

@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/dist/client/router';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import styled from 'styled-components';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
 import BackNavBasic from '@components/common/BackNavBasic';
 import SubscriptionInfo from '@components/SubscriptionInfo';
 import SubscriptionDetailInfo from '@components/SubscriptionDetailInfo';
@@ -13,102 +11,57 @@ interface ISubscriptionHomeProps {
   result?: boolean;
 }
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
 
 const Container = styled.div`
   width: 100%;
 `;
 
-const TabContainer = styled.div`
-  width: 100%;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-`;
-
 const ButtonBox = styled.div`
-  //style={{ boxShadow: 'rgb(0 0 0 / 8%) 0px -15px 15px 0px', padding: '40px 28px', position: 'relative' }}
   box-shadow: 0px -15px 15px 0px rgb(0 0 0 / 8%);
-  //padding: 40px 28px;
-
-  //width: 100%;
-  //height: 125px;
   background: white;
   position: fixed;
   padding: 25px;
 
   left: 0;
   bottom: 0;
-  height: 116px;
   width: 100%;
-  
+  height: 116px;
 `;
 
 const TabWrap = styled.div`
   width: 100%;
   margin-top: 68px;
+  
+  .active.nav-link {
+    position: relative;
+    color: black;
+
+    :after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 25px;
+      height: 1px;
+      width: calc(100% - 25px * 2); /* 길이 설정 */
+      border-bottom: 4px solid black;
+      border-radius: 30px;
+    }
+  }
+
+  .nav-link {
+    color: #CACACA;
+    padding: 18px 20px;
+  }
 `;
 
-const TabsBox = styled(Tabs)({
-  boxShadow: '0px 13px 17px rgb(0 0 0 / 4%)',
-  '& .MuiTabs-indicator': {
-    display: 'flex',
-    backgroundColor: 'black',
-    height: '3px',
-  },
-});
-
-const TabsItem = styled(Tab)({
-  fontFamily: 'Pretendard',
-  fontSize: '14px',
-  color: '#CACACA !important',
-  ':hover': {
-    color: 'black',
-  },
-  '&.Mui-selected': {
-    color: '#000000 !important',
-    backgroundColor: 'white',
-    fontWeight: 600,
-  },
-});
-
-
-const TabPanel = (props: TabPanelProps) => {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role='tabpanel'
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 0 }}>
-          <div>{children}</div>
-        </Box>
-      )}
-    </div>
-  );
-};
-
-
 const SubscriptionHome: React.FC<ISubscriptionHomeProps> = ({
-                                                             result
-                                                           }) => {
+                                                              result,
+                                                            }) => {
   const router = useRouter();
-  const [value, setValue] = React.useState(0);
+  const [tab, setTab] = React.useState<number | string>(0);
+  const [activeTab, setActiveTab] = React.useState(true);
+  const [activeTabs, setActiveTabs] = React.useState(false);
 
-
-  useEffect(()=>{
-    // console.log(result)
-  },[])
 
   const goToMain = () => {
     console.log('go to main!');
@@ -128,42 +81,54 @@ const SubscriptionHome: React.FC<ISubscriptionHomeProps> = ({
     router.push('/SubscriptionOrder');
   };
 
-  const handleChange = (event: any, newValue: any) => {
-    setValue(newValue);
+
+  const handleChange = (newValue: any) => {
+    setTab(newValue);
+    setActiveTab(!activeTab);
+    setActiveTabs(!activeTabs);
   };
+
 
   return (
     <Container>
       <BackNavBasic title={'해운대 엘시티'} onClick={() => goToMain()} />
-      <TabContainer>
-        <TabWrap>
-          <TabsBox
-            value={value} onChange={handleChange}
-            aria-label='Main Tabs' variant='fullWidth'>
-            <TabsItem disableRipple label='개요' />
-            <TabsItem disableRipple label='상세정보' />
-          </TabsBox>
-        </TabWrap>
-        <TabPanel value={value} index={0} >
-          <SubscriptionInfo />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <SubscriptionDetailInfo />
-        </TabPanel>
-        {/*청약 신청 버튼을 누르기 전의 경우에 존재함*/}
-        <ButtonBox>
-          <BasicButton
-            theme={result !== true ? BasicButtonTheme.SuccesRounded : BasicButtonTheme.FailRounded }
-            onClick={() => goToSubscriptionOrder()}
-            style={{ width: '100%', marginTop: 4 }}
-          >
-            {/*{*/}
-            {/*  result !== true ? '청약 신청하기' : '청약 취소하기'*/}
-            {/*}*/}
-            청약 신청하기
-          </BasicButton>
-        </ButtonBox>
-      </TabContainer>
+      <TabWrap>
+        <Nav variant='tabs'
+             defaultactivekey='link-0'
+             justified
+             style={{ position: 'fixed', width: '100%', zIndex: '120', background: 'white' }}
+        >
+          <NavItem>
+            <NavLink eventkey='link-0' onClick={() => handleChange(0)} className={'nav-link'} active={activeTab}>
+              개요
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink eventkey='link-1' onClick={() => handleChange(1)} className={'nav-link'} active={activeTabs}>
+              상세정보
+            </NavLink>
+          </NavItem>
+        </Nav>
+        <TabContent activeTab={String(tab)}>
+          <TabPane tabId='0'>
+            <SubscriptionInfo />
+          </TabPane>
+          <TabPane tabId='1'>
+            <SubscriptionDetailInfo />
+          </TabPane>
+        </TabContent>
+      </TabWrap>
+      {/*  /!*청약 신청 버튼을 누르기 전의 경우 존재함*!/ */}
+      <ButtonBox>
+        <BasicButton
+          theme={result !== true ? BasicButtonTheme.SuccesRounded : BasicButtonTheme.FailRounded}
+          onClick={() => goToSubscriptionOrder()}
+          style={{ width: '100%', marginTop: 4 }}
+        >
+          청약 신청하기
+        </BasicButton>
+      </ButtonBox>
+
     </Container>
   );
 };

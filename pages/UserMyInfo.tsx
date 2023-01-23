@@ -14,9 +14,11 @@ import 'react-toggle/style.css';
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  //height: 100vh;
   position: relative;
-  overflow: auto;
+  //overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-color: #F5F6F8;
 `;
 

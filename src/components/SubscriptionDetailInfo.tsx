@@ -5,7 +5,7 @@ import MapImg from '@static/images/img_map.png';
 
 const Container = styled.div`
   width: 100%;
-  height: 74vh;
+  height: 85vh; // 청약버튼이 있는 경우 필요하고, 없을경우 없어도 됨
   position: relative;
   overflow: auto;
   background-color: #F5F6F8;
@@ -101,7 +101,7 @@ const MapImageWrapper = styled.div`
 const MapImage = ({...props}: ImageProps) => {
   return (
     <MapImageWrapper>
-      <Image fill={true} {...props} />
+      <Image {...props} />
     </MapImageWrapper>
   );
 };
@@ -116,12 +116,14 @@ const SubscriptionDetailInfo = () => {
 
   return (
     <Container>
-      <ContentsBox style={{height: 515}}>
+      <ContentsBox style={{height: 574, paddingTop:85}}>
         <ServiceMenuTitle onClick={() => handleClick()}>
           매물 정보
         </ServiceMenuTitle>
         <BuildingInfos>
-          <MapImage src={MapImg.src} alt={'mapImg'}/>
+          <MapImage src={MapImg.src} alt={'mapImg'} fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
         </BuildingInfos>
         <InfoBuildingWrap>
           <InfoTitle>
@@ -150,7 +152,7 @@ const SubscriptionDetailInfo = () => {
           </InfoContents>
         </InfoBuildingWrap>
       </ContentsBox>
-      <ContentsBox style={{height: 395, marginTop: 12, marginBottom: 12}}>
+      <ContentsBox style={{height: 395, marginTop: 12, marginBottom: 70}}>
         <ServiceMenuTitle>
           청약 정보
         </ServiceMenuTitle>

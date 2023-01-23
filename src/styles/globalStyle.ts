@@ -1,12 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
   * {
-    box-sizing: border-box;
+    //box-sizing: border-box;
   }
 
   body {

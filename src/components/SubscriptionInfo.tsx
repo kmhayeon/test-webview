@@ -13,11 +13,9 @@ import CollusionBenefit from '@pages/CollusionBenefit';
 
 {/*청약 신청 버튼을 누르고 신청이 되었을 경우*/}
 //93vh
-
-
 const Container = styled.div`
   width: 100%;
-  height: 78vh;
+  height: 85vh; // 청약버튼이 있는 경우 필요하고, 없을경우 없어도 됨
   background-color: #F5F6F8;
   position: relative;
   overflow-x:hidden;
@@ -147,7 +145,7 @@ const SubscriptionInfo  = ({}) => {
   return (
       <Container>
         {/*청약 신청 버튼을 누르고 신청이 되었을 경우*/}
-        <ServiceCenterWrap style={{ height: 300 }}>
+        <ServiceCenterWrap style={{ height: 355, paddingTop: 85 }}>
           <div style={{ display: 'flex'}}>
           <ServiceMenuTitle onClick={() => handleClick()}>
             내 체결 내역
@@ -170,6 +168,7 @@ const SubscriptionInfo  = ({}) => {
 
         {/*청약 신청 버튼을 누르기 전의 경우*/}
         <ServiceCenterWrap style={{ height: 350, marginTop: 12 }}>
+          {/*내 체결내역이 있을경우 marginTop : 50*/}
           <ServiceMenuTitle onClick={() => handleClick()}>
             청약 정보
           </ServiceMenuTitle>
@@ -195,8 +194,6 @@ const SubscriptionInfo  = ({}) => {
             <BuildingSub>19.3억 <span style={{color:'#727272'}}>/ 31억</span></BuildingSub>
           </BuildingInfo>
         </ServiceCenterWrap>
-
-
         <ServiceCenterWrap style={{ height: 370, marginTop: 12 }}>
           <ServiceMenuTitle onClick={() => handleClick()}>
             부동산 정보
@@ -278,7 +275,7 @@ const SubscriptionInfo  = ({}) => {
                    alt={'icon-next'} width={24} height={24} />
           </ServiceMenuTitle>
         </ServiceCenterWrap>
-        <ServiceCenterWrap style={{ height: 90, marginTop: 12, marginBottom: 80}}>
+        <ServiceCenterWrap style={{ height: 90, marginTop: 12, marginBottom: 70}}>
           <ServiceMenuTitle style={{marginTop:7}} onClick={() => goInvestmentInfo()}>
             투자관련 문서
             <Image className='next-icon' src={iconNextBig.src}
