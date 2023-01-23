@@ -84,8 +84,6 @@ const SubscriptionHome: React.FC<ISubscriptionHomeProps> = ({
 
   const handleChange = (newValue: any) => {
     setTab(newValue);
-    setActiveTab(!activeTab);
-    setActiveTabs(!activeTabs);
   };
 
 
@@ -96,15 +94,19 @@ const SubscriptionHome: React.FC<ISubscriptionHomeProps> = ({
         <Nav variant='tabs'
              defaultactivekey='link-0'
              justified
-             style={{ position: 'fixed', width: '100%', zIndex: '120', background: 'white' }}
+             style={{ position: 'fixed', width: '100%', zIndex: '120', background: 'white',
+               borderBottom:'1px solid rgba(0, 0, 0, 0.04)'
+             }}
         >
           <NavItem>
-            <NavLink eventkey='link-0' onClick={() => handleChange(0)} className={'nav-link'} active={activeTab}>
+            <NavLink eventkey='link-0' onClick={() => handleChange(0)} className={'nav-link'}
+                     active={tab === 0 ? true : false}>
               개요
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink eventkey='link-1' onClick={() => handleChange(1)} className={'nav-link'} active={activeTabs}>
+            <NavLink eventkey='link-1' onClick={() => handleChange(1)} className={'nav-link'}
+                     active={tab === 1 ? true : false}>
               상세정보
             </NavLink>
           </NavItem>

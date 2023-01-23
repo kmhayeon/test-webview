@@ -130,7 +130,7 @@ const MarketPrice = () => {
 
   return (
     <Container>
-      <div>
+      <div style={{ paddingTop: 53 }}>
         <TabWrap>
           <TabsBox
             value={value} onChange={handleChange}

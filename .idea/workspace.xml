@@ -3,12 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a24044c1-5644-477a-867f-89d651bffcdf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/Main.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/SubscriptionHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/SubscriptionHome.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/UserMyInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/UserMyInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SubscriptionDetailInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SubscriptionDetailInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SubscriptionInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SubscriptionInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/globalStyle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/globalStyle.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/TransactionHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/TransactionHome.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BuildingOrder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BuildingOrder.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MarketPrice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MarketPrice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TransactionInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TransactionInfo.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,5 +52,23 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/BuildingOrder.tsx</url>
+          <line>356</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/BuildingOrder.tsx</url>
+          <line>485</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

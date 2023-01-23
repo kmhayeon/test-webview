@@ -7,19 +7,13 @@ import IconUnion from '@static/images/icon_union.png';
 import iconSeleted from '@static/images/icon_selected.png';
 import iconWarning from '@static/images/icon_warning.png';
 import { BasicButton, BasicButtonTheme } from '@components/common/BasicButton';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 import { FakeMockNoOrderData, FakeMockOrderData } from '../../makeMock';
 import { BasicInput } from '@components/common/BasicInput';
+import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
+import SubscriptionInfo from '@components/SubscriptionInfo';
+import SubscriptionDetailInfo from '@components/SubscriptionDetailInfo';
 
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
 
 export interface TEST_DATA {
   price: number,
@@ -84,8 +78,9 @@ const CounterBox = styled.div`
 const RightBox = styled.div`
 `;
 
-
 const TabWrap = styled.div`
+  width: 100%;
+
   hr {
     border: 0px;
 
@@ -96,6 +91,22 @@ const TabWrap = styled.div`
       margin-top: 10px;
       margin-bottom: 10px;
     }
+  }
+
+  .text-link.nav-link.active {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  .active.nav-link:after {
+    border-bottom: 0px !important;
+  }
+
+  .nav-link {
+    background: #F5F6F8;
+    color: rgb(202, 202, 202) !important;
+    padding: 18px 20px;
+  }
 `;
 
 const TabInfoBox = styled.div`
@@ -122,30 +133,6 @@ const TabSubBox = styled.div`
     letter-spacing: 0.009rem;
   }
 `;
-
-const TabsBox = styled(Tabs)({
-  backgroundColor: '#F5F6F8',
-  '& .MuiTabs-indicator': {
-    display: 'flex',
-    backgroundColor: 'white',
-    height: '3px',
-  },
-});
-
-const TabsItem = styled(Tab)({
-  fontFamily: 'Pretendard',
-  fontSize: '14px',
-  color: '#CACACA !important',
-  fontWeight: 400,
-  ':hover': {
-    color: 'black',
-  },
-  '&.Mui-selected': {
-    color: '#000000 !important',
-    backgroundColor: 'white',
-    fontWeight: 600,
-  },
-});
 
 const TabSubButtomBox = styled.div`
   display: flex;
@@ -205,25 +192,13 @@ const SubText = styled.div`
   margin-bottom: 100px;
 `;
 
-const TabOutWrap = styled.div`
-  padding: 20px 28px 0px 28px;
-
-  @media screen and (min-width: 400px) {
-    padding: 21px 28px 0px 28px;
-  }
-
-  @media screen and (min-width: 500px) {
-    padding: 24px 28px 0px 28px;
-  }
-`;
-
 const BasicButtonBox = styled.div`
   width: 100%;
   height: 100px;
   padding-top: 23px;
 
   @media screen and (min-width: 400px) {
-    padding-top: 24px;  
+    padding-top: 24px;
   }
 
   @media screen and (min-width: 500px) {
@@ -232,25 +207,31 @@ const BasicButtonBox = styled.div`
 `;
 
 
-const TabPanel = (props: TabPanelProps) => {
-  const { children, value, index, ...other } = props;
+const BottomSheetWrap = styled.div`
+  .bottom-nav-sell.nav-link {
+    padding: 25px !important;
+    color: #3C4BCD;
+    border-radius: 16px 0px 0px 0px !important;
+  }
 
-  return (
-    <div
-      role='tabpanel'
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 0 }}>
-          <div>{children}</div>
-        </Box>
-      )}
-    </div>
-  );
-};
+  .bottom-nav-buy.nav-link {
+    padding: 25px !important;
+    color: #CE4B4B;
+    border-radius: 0px 16px 0px 0px !important;
+  }
+
+  .bottom-nav-sell.nav-link.active {
+    background-color: white !important;
+    color: #3C4BCD !important;
+    border-radius: 16px 0px 0px 0px !important;
+  }
+
+  .bottom-nav-buy.nav-link.active {
+    background-color: white !important;
+    color: #CE4B4B !important;
+    border-radius: 0px 16px 0px 0px !important;
+  }
+`;
 
 
 const BuildingOrder = () => {
@@ -258,45 +239,12 @@ const BuildingOrder = () => {
   const [open, setOpen] = useState(true);
   const [numberCounter, setNumberCounter] = React.useState<number | string>('');
   const [priceCounter, setPriceCounter] = React.useState<number | string>('');
-  const [value, setValue] = React.useState(0);
   const [disabled, setDisabled] = React.useState(false);
-  const [valueModal, setValueModal] = React.useState(2);
   const focusRef = useRef<HTMLButtonElement | any>();
   const sheetRef = useRef<BottomSheetRef | any>();
+  const [tab, setTab] = React.useState<number | string>(0);
+  const [tab2, setTab2] = React.useState<number | string>(2);
 
-  const TabsItems = styled(Tab)({
-    fontFamily: 'Pretendard',
-    fontSize: '16px',
-    paddingTop: '20px',
-    borderRadius: '18px 0px 0px 0px',
-    color: `${valueModal === 2 ? '#3C4BCD !important' : '#CACACA !important'}`,
-    backgroundColor: `${valueModal === 2 ? 'white !important' : '#F5F6F8 !important'}`,
-    '&.Mui-selected': {
-      color: `${valueModal !== 2 ? '#3C4BCD !important' : ''}`,
-      backgroundColor: `${valueModal !== 2 ? 'white !important' : ''}`,
-      fontWeight: 600,
-      borderRadius: '16px 0px 0px 0px',
-    },
-  });
-
-  const TabsItems2 = styled(Tab)({
-    fontFamily: 'Pretendard',
-    fontSize: '16px',
-    paddingTop: '20px',
-    borderRadius: '0px 18px 0px 0px',
-    color: `${valueModal !== 0 ? '#CE4B4B !important' : '#CACACA !important'}`,
-    backgroundColor: `${valueModal !== 0 ? 'white !important' : '#F5F6F8 !important'}`,
-    '&.Mui-selected': {
-      color: `${valueModal !== 0 ? '#CE4B4B !important' : ''}`,
-      backgroundColor: `${valueModal !== 0 ? 'white !important' : ''}`,
-      fontWeight: 600,
-      borderRadius: '0px 16px 0px 0px',
-    },
-  });
-
-  const TabsItems3 = styled.div({
-    visibility: 'hidden',
-  });
 
   const onClickNumberPlusCounter = (numberCounter) => {
     const num = Number(numberCounter);
@@ -328,20 +276,12 @@ const BuildingOrder = () => {
     setOpen(false);
   };
 
-  const handleChangeModal = (event: any, newValue: any) => {
-    setValueModal(newValue);
-  };
-
-  const handleChange = (event: any, newValue: any) => {
-    setValue(newValue);
-  };
-
   const handleContentsAdd = () => {
     console.log('더보기 클릭');
   };
 
   const handleClose = () => {
-    setValueModal(2);
+    setTab2(2);
     sheetRef.current?.snapTo(({ minHeight }) => minHeight - minHeight / 1.5);
   };
 
@@ -349,16 +289,22 @@ const BuildingOrder = () => {
     router.push('/BuyRequest');
   };
 
-
   const goToSellOrder = () => {
     router.push('/SellRequest');
   };
 
+  const handleChange = (newValue: any) => {
+    setTab(newValue);
+  };
+
+  const handleChange2 = (newValue2: any) => {
+    setTab2(newValue2);
+    sheetRef.current?.snapTo(({ maxHeight }) => maxHeight);
+  };
+
   return (
     <Container>
-      <div style={{ display: 'flex' }}
-           onClick={() => handleClose()}>
-
+      <div style={{ display: 'flex', paddingTop: 53 }} onClick={() => handleClose()}>
         <ChartWrap>
           {FakeMockOrderData.map((num: TEST_DATA, idx: number) => {
             return (
@@ -384,124 +330,136 @@ const BuildingOrder = () => {
           })}
         </ChartWrap>
 
-
         <ChartWraps>
           <RightBox>
             <TabWrap>
-              <TabsBox
-                value={value} onChange={handleChange}
-                aria-label='Main Tabs' variant='fullWidth'>
-                <TabsItem disableRipple label='체결' />
-                <TabsItem disableRipple label='미체결' />
-              </TabsBox>
-              <TabPanel value={value} index={0}>
-                {/*체결 내역이 있는 경우*/}
-                {FakeMockNoOrderData.map((num: TEST2_DATA, idx: number) => {
-                  return (
-                    <div key={idx}>
-                      <TabInfoBox>
-                        <TabSubBox>
-                          <div style={num.title === '판매' ? { color: '#3C4BCD' } : { color: '#CE4B4B' }}>
-                            {num.title} <br /><span>{num.date}</span>
-                          </div>
-                        </TabSubBox>
-                        <TabSubButtomBox>
-                          <TabLeftBox>
-                            <div>가격</div>
-                            <div>수량</div>
-                            <div>구매</div>
-                          </TabLeftBox>
-                          <TabRightBox>
-                            <div>{num.price.toLocaleString()}원</div>
-                            <div>{num.count}개</div>
-                            <div>{num.val.toLocaleString()}원</div>
-                          </TabRightBox>
-                        </TabSubButtomBox>
-                      </TabInfoBox>
-                      <hr />
-                    </div>
-                  );
-                })}
-                <div style={{ textAlign: 'center' }}>
-                  <BasicButton
-                    theme={BasicButtonTheme.BlackInline}
-                    onClick={() => handleContentsAdd()}
-                    style={{ width: '75%', height: '33px', padding: 0, fontSize: 12, borderRadius: 8 }}
-                  >
-                    더보기
-                  </BasicButton>
-                </div>
-                <SubText>최근 3개월 간의 내역이 보여요.</SubText>
+              <Nav variant='tabs'
+                   defaultactivekey='link-0'
+                   justified
+              >
+                <NavItem>
+                  <NavLink eventkey='link-0' onClick={() => handleChange(0)}
+                           className={'text-link'}
+                           active={tab === 0 ? true : false}>
+                    체결
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink eventkey='link-1' onClick={() => handleChange(1)}
+                           className={'text-link'}
+                           active={tab === 1 ? true : false}>
+                    미체결
+                  </NavLink>
+                </NavItem>
+              </Nav>
+              <TabContent activeTab={String(tab)}>
+                <TabPane tabId='0'>
+                  {/*체결 내역이 있는 경우*/}
+                  {FakeMockNoOrderData.map((num: TEST2_DATA, idx: number) => {
+                    return (
+                      <div key={idx}>
+                        <TabInfoBox>
+                          <TabSubBox>
+                            <div style={num.title === '판매' ? { color: '#3C4BCD' } : { color: '#CE4B4B' }}>
+                              {num.title} <br /><span>{num.date}</span>
+                            </div>
+                          </TabSubBox>
+                          <TabSubButtomBox>
+                            <TabLeftBox>
+                              <div>가격</div>
+                              <div>수량</div>
+                              <div>구매</div>
+                            </TabLeftBox>
+                            <TabRightBox>
+                              <div>{num.price.toLocaleString()}원</div>
+                              <div>{num.count}개</div>
+                              <div>{num.val.toLocaleString()}원</div>
+                            </TabRightBox>
+                          </TabSubButtomBox>
+                        </TabInfoBox>
+                        <hr />
+                      </div>
+                    );
+                  })}
+                  <div style={{ textAlign: 'center' }}>
+                    <BasicButton
+                      theme={BasicButtonTheme.BlackInline}
+                      onClick={() => handleContentsAdd()}
+                      style={{ width: '75%', height: '33px', padding: 0, fontSize: 12, borderRadius: 8 }}
+                    >
+                      더보기
+                    </BasicButton>
+                  </div>
+                  <SubText>최근 3개월 간의 내역이 보여요.</SubText>
+                  {/*체결 내역이 없는 경우*/}
+                  {/*<TabContents>*/}
+                  {/*  <Image src={iconWarning.src} alt={'iconWarning'} width={24} height={24} />*/}
+                  {/*  <div>체결 내역이<br/> 없습니다.</div>*/}
+                  {/*</TabContents>*/}
+                </TabPane>
+                <TabPane tabId='1'>
+                  {/*{FakeMockNoOrderData.map((num: TEST2_DATA, idx: number) => {*/}
+                  {/*  return (*/}
+                  {/*    <>*/}
+                  {/*      <TabInfoBox key={idx}>*/}
+                  {/*        <TabSubBox>*/}
+                  {/*          <div style={num.title === '판매' ? { color: '#3C4BCD' } : { color: '#CE4B4B' }}>*/}
+                  {/*            {num.title} <br /><span>{num.date}</span>*/}
+                  {/*          </div>*/}
+                  {/*        </TabSubBox>*/}
+                  {/*        <TabSubButtomBox>*/}
+                  {/*          <TabLeftBox>*/}
+                  {/*            <div>가격</div>*/}
+                  {/*            <div>수량</div>*/}
+                  {/*            <div>금액</div>*/}
+                  {/*          </TabLeftBox>*/}
+                  {/*          <TabRightBox>*/}
+                  {/*            <div>{num.price.toLocaleString()}원</div>*/}
+                  {/*            <div>{num.count}개</div>*/}
+                  {/*            <div>{num.val.toLocaleString()}원</div>*/}
+                  {/*          </TabRightBox>*/}
+                  {/*        </TabSubButtomBox>*/}
+                  {/*        <ButtonBox>*/}
+                  {/*          <BasicButton*/}
+                  {/*            theme={BasicButtonTheme.BlackRounded}*/}
+                  {/*            onClick={() => handleContentsAdd()}*/}
+                  {/*            style={{ width: '95%', height: '33px', padding: 0, fontSize: 12, borderRadius: 8 }}*/}
+                  {/*          >*/}
+                  {/*            수정하기*/}
+                  {/*          </BasicButton>*/}
+                  {/*          <BasicButton*/}
+                  {/*            theme={BasicButtonTheme.BlackInline}*/}
+                  {/*            onClick={() => handleContentsAdd()}*/}
+                  {/*            style={{*/}
+                  {/*              width: '95%',*/}
+                  {/*              height: '33px',*/}
+                  {/*              padding: 0,*/}
+                  {/*              fontSize: 12,*/}
+                  {/*              borderRadius: 8,*/}
+                  {/*              marginTop: 10,*/}
+                  {/*            }}*/}
+                  {/*          >*/}
+                  {/*            취소하기*/}
+                  {/*          </BasicButton>*/}
+                  {/*        </ButtonBox>*/}
+                  {/*      </TabInfoBox>*/}
+                  {/*      <hr />*/}
+                  {/*    </>*/}
+                  {/*  );*/}
+                  {/*})}*/}
 
-                {/*체결 내역이 없는 경우*/}
-                {/*<TabContents>*/}
-                {/*  <Image src={iconWarning.src} alt={'iconWarning'} width={24} height={24} />*/}
-                {/*  <div>체결 내역이<br/> 없습니다.</div>*/}
-                {/*</TabContents>*/}
-              </TabPanel>
-
-              <TabPanel value={value} index={1}>
-                {/*미체결 내역이 있는 경우*/}
-                {/*{FakeMockNoOrderData.map((num: TEST2_DATA, idx: number) => {*/}
-                {/*  return (*/}
-                {/*    <>*/}
-                {/*      <TabInfoBox key={idx}>*/}
-                {/*        <TabSubBox>*/}
-                {/*          <div style={num.title === '판매' ? { color: '#3C4BCD' } : { color: '#CE4B4B' }}>*/}
-                {/*            {num.title} <br /><span>{num.date}</span>*/}
-                {/*          </div>*/}
-                {/*        </TabSubBox>*/}
-                {/*        <TabSubButtomBox>*/}
-                {/*          <TabLeftBox>*/}
-                {/*            <div>가격</div>*/}
-                {/*            <div>수량</div>*/}
-                {/*            <div>금액</div>*/}
-                {/*          </TabLeftBox>*/}
-                {/*          <TabRightBox>*/}
-                {/*            <div>{num.price.toLocaleString()}원</div>*/}
-                {/*            <div>{num.count}개</div>*/}
-                {/*            <div>{num.val.toLocaleString()}원</div>*/}
-                {/*          </TabRightBox>*/}
-                {/*        </TabSubButtomBox>*/}
-                {/*        <ButtonBox>*/}
-                {/*          <BasicButton*/}
-                {/*            theme={BasicButtonTheme.BlackRounded}*/}
-                {/*            onClick={() => handleContentsAdd()}*/}
-                {/*            style={{ width: '95%', height: '33px', padding: 0, fontSize: 12, borderRadius: 8 }}*/}
-                {/*          >*/}
-                {/*            수정하기*/}
-                {/*          </BasicButton>*/}
-                {/*          <BasicButton*/}
-                {/*            theme={BasicButtonTheme.BlackInline}*/}
-                {/*            onClick={() => handleContentsAdd()}*/}
-                {/*            style={{*/}
-                {/*              width: '95%',*/}
-                {/*              height: '33px',*/}
-                {/*              padding: 0,*/}
-                {/*              fontSize: 12,*/}
-                {/*              borderRadius: 8,*/}
-                {/*              marginTop: 10,*/}
-                {/*            }}*/}
-                {/*          >*/}
-                {/*            취소하기*/}
-                {/*          </BasicButton>*/}
-                {/*        </ButtonBox>*/}
-                {/*      </TabInfoBox>*/}
-                {/*      <hr />*/}
-                {/*    </>*/}
-                {/*  );*/}
-                {/*})}*/}
-
-                {/*미체결 내역이 없는 경우*/}
-                <TabContents>
-                  <Image src={iconWarning.src} alt={'iconWarning'} width={24} height={24} />
-                  <div>미체결 내역이<br /> 없습니다.</div>
-                </TabContents>
-              </TabPanel>
+                  {/*미체결 내역이 없는 경우*/}
+                  <TabContents>
+                    <Image src={iconWarning.src} alt={'iconWarning'} width={24} height={24} />
+                    <div>미체결 내역이<br /> 없습니다.</div>
+                  </TabContents>
+                </TabPane>
+              </TabContent>
             </TabWrap>
           </RightBox>
         </ChartWraps>
       </div>
+
 
       <div>
         <BottomSheet
@@ -518,23 +476,33 @@ const BuildingOrder = () => {
           blocking={false}
           onDismiss={onDismiss}
         >
-          <div className='flex items-center text-xl justify-center'>
-            <TabsBox
-              value={valueModal} onChange={handleChangeModal}
-              aria-label='Main Tabs' variant='fullWidth'>
+          <BottomSheetWrap className='flex items-center text-xl justify-center'>
+            <Nav variant='tabs'
+                 defaultactivekey='link-0'
+                 justified
+            >
+              <NavItem>
+                <NavLink eventkey='link-0' className={'bottom-nav-sell'}
+                         active={tab2 === 0 ? true : false} ref={focusRef}
+                         style={tab2 === 1 ? { backgroundColor: '#F5F6F8', color: '#CACACA' } : {}}
+                         onClick={() => handleChange2(0)}>
 
-              <TabsItems disableRipple label='팔래요' ref={focusRef}
-                         onClick={() => sheetRef.current?.snapTo(({ maxHeight }) => maxHeight)} />
+                  팔래요
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink eventkey='link-1' className={'bottom-nav-buy'}
+                         active={tab2 === 1 ? true : false} ref={focusRef}
+                         style={tab2 === 0 ? { backgroundColor: '#F5F6F8', color: '#CACACA' } : {}}
+                         onClick={() => handleChange2(1)}>
+                  살래요
+                </NavLink>
+              </NavItem>
+            </Nav>
+          </BottomSheetWrap>
 
-              <TabsItems2 disableRipple label='살래요' ref={focusRef}
-                          onClick={() => sheetRef.current?.snapTo(({ maxHeight }) => maxHeight)}
-              />
-              <TabsItems3 />
-            </TabsBox>
-          </div>
-
-          <TabOutWrap>
-            <TabPanel value={valueModal} index={0}>
+          <TabContent activeTab={String(tab2)} style={{ padding: '21px 28px' }}>
+            <TabPane tabId='0'>
               <div style={{ display: 'flex' }}>
                 <div style={{
                   marginTop: 2, marginRight: 'auto', fontSize: 16,
@@ -545,14 +513,10 @@ const BuildingOrder = () => {
               </div>
               <div>
                 <div style={{ display: 'flex', marginTop: 18 }}>
-                  {/*<CounterBox style={{ height: 52, marginRight: 'auto' }}>*/}
-                  {/*  {numberCounter}*/}
-                  {/*</CounterBox>*/}
                   <BasicInput
                     style={{ width: '100%' }}
                     value={numberCounter}
                     placeholder='수량'
-                    // onChange={value => setCount(value)}
                     disabled={false}
                   />
                   <div style={{ marginLeft: 'auto' }}>
@@ -613,8 +577,9 @@ const BuildingOrder = () => {
                     style={{ width: '100%' }}>매도 주문하기</BasicButton>
                 </BasicButtonBox>
               </div>
-            </TabPanel>
-            <TabPanel value={valueModal} index={1}>
+
+            </TabPane>
+            <TabPane tabId='1'>
               <div style={{ display: 'flex' }}>
                 <div style={{
                   marginTop: 2, marginRight: 'auto', fontSize: 16,
@@ -629,7 +594,6 @@ const BuildingOrder = () => {
                     style={{ width: '100%' }}
                     value={numberCounter}
                     placeholder='수량'
-                    // onChange={value => setCount(value)}
                     disabled={false}
                   />
                   <div style={{ marginLeft: 'auto' }}>
@@ -653,14 +617,10 @@ const BuildingOrder = () => {
                 </div>
 
                 <div style={{ display: 'flex', marginTop: 12 }}>
-                  {/*<CounterBox style={{ height: 52, marginRight: 'auto' }}>*/}
-                  {/*  {priceCounter}*/}
-                  {/*</CounterBox>*/}
                   <BasicInput
                     style={{ width: '100%' }}
                     value={priceCounter}
                     placeholder='가격'
-                    // onChange={value => setCount(value)}
                     disabled={false}
                   />
                   <div style={{ marginLeft: 'auto' }}>
@@ -683,17 +643,17 @@ const BuildingOrder = () => {
                   </div>
                 </div>
                 <BasicButtonBox>
-                <BasicButton
-                  disabled={disabled}
-                  theme={BasicButtonTheme.FailRounded}
-                  onClick={() => goToBuyOrder()}
-                  style={{ width: '100%' }}
-                >매수 주문하기
-                </BasicButton>
+                  <BasicButton
+                    disabled={disabled}
+                    theme={BasicButtonTheme.FailRounded}
+                    onClick={() => goToBuyOrder()}
+                    style={{ width: '100%' }}
+                  >매수 주문하기
+                  </BasicButton>
                 </BasicButtonBox>
               </div>
-            </TabPanel>
-          </TabOutWrap>
+            </TabPane>
+          </TabContent>
         </BottomSheet>
       </div>
     </Container>

@@ -143,7 +143,7 @@ const TransactionInfo = () => {
 
   return (
     <Container>
-      <ContentsWrap style={{ height: 590 }}>
+      <ContentsWrap style={{ height: 590, paddingTop: 85 }}>
         <ServiceMenuTitle onClick={() => handleClick()}>
           부동산 정보
         </ServiceMenuTitle>
