@@ -230,8 +230,14 @@ const BottomSheetWrap = styled.div`
   }
 `;
 
+interface ConfirmModalProps {
+  onClosePress: () => void
+}
 
-const BuildingOrder = () => {
+
+const BuildingOrder : React.FC<ConfirmModalProps> = props => {
+  const { onClosePress } = props
+
   const router = useRouter();
   const [open, setOpen] = useState(true);
   const [numberCounter, setNumberCounter] = React.useState<number | string>('');
@@ -301,7 +307,7 @@ const BuildingOrder = () => {
 
   return (
     <Container>
-      <div style={{ display: 'flex', paddingTop: 53 }} onClick={() => handleClose()}>
+      <div style={{ display: 'flex', paddingTop: 53 }} onClick={onClosePress}>
         <ChartWrap>
           {FakeMockOrderData.map((num: TEST_DATA, idx: number) => {
             return (
@@ -455,203 +461,6 @@ const BuildingOrder = () => {
             </TabWrap>
           </RightBox>
         </ChartWraps>
-      </div>
-
-
-
-      <div>
-        <BottomSheet
-          open={open}
-          skipInitialTransition
-          sibling={<div className='z-10' />}
-          ref={sheetRef}
-          initialFocusRef={focusRef}
-          defaultSnap={({ minHeight }) => minHeight}
-          snapPoints={({ maxHeight }) => [
-            maxHeight - maxHeight / 1.65,
-            maxHeight / 14,
-          ]}
-          blocking={false}
-          onDismiss={onDismiss}
-        >
-          <BottomSheetWrap className='flex items-center text-xl justify-center'>
-            <Nav variant='tabs'
-                 defaultactivekey='link-0'
-                 justified
-            >
-              <NavItem>
-                <NavLink eventkey='link-0' className={'bottom-nav-sell'}
-                         active={tab2 === 0 ? true : false} ref={focusRef}
-                         style={tab2 === 1 ? { backgroundColor: '#F5F6F8', color: '#CACACA' } : {}}
-                         onClick={() => handleChange2(0)}>
-
-                  팔래요
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink eventkey='link-1' className={'bottom-nav-buy'}
-                         active={tab2 === 1 ? true : false} ref={focusRef}
-                         style={tab2 === 0 ? { backgroundColor: '#F5F6F8', color: '#CACACA' } : {}}
-                         onClick={() => handleChange2(1)}>
-                  살래요
-                </NavLink>
-              </NavItem>
-            </Nav>
-          </BottomSheetWrap>
-          <TabContent activeTab={String(tab2)} style={{ padding: '21px 28px' }}>
-            <TabPane tabId='0'>
-              <div style={{ display: 'flex' }}>
-                <div style={{
-                  marginTop: 2, marginRight: 'auto', fontSize: 16,
-                  color: '#727272',
-                }}>매도가능수량
-                </div>
-                <div style={{ marginLeft: 'auto', fontSize: 20 }}>100개</div>
-              </div>
-              <div>
-                <div style={{ display: 'flex', marginTop: 18 }}>
-                  <BasicInput
-                    style={{ width: '100%' }}
-                    value={numberCounter}
-                    placeholder='수량'
-                    disabled={false}
-                  />
-                  <div style={{ marginLeft: 'auto' }}>
-                    <div style={{ display: 'flex' }}>
-                      <BasicButton
-                        theme={BasicButtonTheme.BlackInline}
-                        onClick={() => onClickNumberMinusCounter(numberCounter)}
-                        style={{ width: 52, height: 52, padding: 0, marginLeft: 12 }}
-                      >
-                        <Image src={IconRectangle.src} alt={'icon_rectangle'} width={16} height={2} />
-                      </BasicButton>
-                      <BasicButton
-                        theme={BasicButtonTheme.BlackInline}
-                        onClick={() => onClickNumberPlusCounter(numberCounter)}
-                        style={{ width: 52, height: 52, padding: 0, marginLeft: 8 }}
-                      >
-                        <Image src={IconUnion.src} alt={'icon_union'} width={16} height={16} />
-                      </BasicButton>
-                    </div>
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', marginTop: 12 }}>
-                  {/*<CounterBox style={{ height: 52, marginRight: 'auto' }}>*/}
-                  {/*  {priceCounter}*/}
-                  {/*</CounterBox>*/}
-                  <BasicInput
-                    style={{ width: '100%' }}
-                    value={priceCounter}
-                    placeholder='가격'
-                    // onChange={value => setCount(value)}
-                    disabled={false}
-                  />
-                  <div style={{ marginLeft: 'auto' }}>
-                    <div style={{ display: 'flex' }}>
-                      <BasicButton
-                        theme={BasicButtonTheme.BlackInline}
-                        onClick={() => onClickPriceMinusCounter(priceCounter)}
-                        style={{ width: 52, height: 52, padding: 0, marginLeft: 12 }}
-                      >
-                        <Image src={IconRectangle.src} alt='icon_rectangle' width={16} height={2} />
-                      </BasicButton>
-                      <BasicButton
-                        theme={BasicButtonTheme.BlackInline}
-                        onClick={() => onClickPricePlusCounter(priceCounter)}
-                        style={{ width: 52, height: 52, padding: 0, marginLeft: 8 }}
-                      >
-                        <Image src={IconUnion.src} alt='icon_union' width={16} height={16} />
-                      </BasicButton>
-                    </div>
-                  </div>
-                </div>
-                <BasicButtonBox style={{ width: '100%', height: '100px' }}>
-                  <BasicButton
-                    disabled={false}
-                    theme={BasicButtonTheme.SuccesRounded}
-                    onClick={() => goToSellOrder()}
-                    style={{ width: '100%' }}>매도 주문하기</BasicButton>
-                </BasicButtonBox>
-              </div>
-
-            </TabPane>
-            <TabPane tabId='1'>
-              <div style={{ display: 'flex' }}>
-                <div style={{
-                  marginTop: 2, marginRight: 'auto', fontSize: 16,
-                  color: '#727272',
-                }}>매수가능금액
-                </div>
-                <div style={{ marginLeft: 'auto', fontSize: 20 }}>50,000원</div>
-              </div>
-              <div>
-                <div style={{ display: 'flex', marginTop: 18 }}>
-                  <BasicInput
-                    style={{ width: '100%' }}
-                    value={numberCounter}
-                    placeholder='수량'
-                    disabled={false}
-                  />
-                  <div style={{ marginLeft: 'auto' }}>
-                    <div style={{ display: 'flex' }}>
-                      <BasicButton
-                        theme={BasicButtonTheme.BlackInline}
-                        onClick={() => onClickNumberMinusCounter(Number(numberCounter))}
-                        style={{ width: 52, height: 52, padding: 0, marginLeft: 12 }}
-                      >
-                        <Image src={IconRectangle.src} alt={'icon_rectangle'} width={16} height={2} />
-                      </BasicButton>
-                      <BasicButton
-                        theme={BasicButtonTheme.BlackInline}
-                        onClick={() => onClickNumberPlusCounter(Number(numberCounter))}
-                        style={{ width: 52, height: 52, padding: 0, marginLeft: 8 }}
-                      >
-                        <Image src={IconUnion.src} alt={'icon_union'} width={16} height={16} />
-                      </BasicButton>
-                    </div>
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', marginTop: 12 }}>
-                  <BasicInput
-                    style={{ width: '100%' }}
-                    value={priceCounter}
-                    placeholder='가격'
-                    disabled={false}
-                  />
-                  <div style={{ marginLeft: 'auto' }}>
-                    <div style={{ display: 'flex' }}>
-                      <BasicButton
-                        theme={BasicButtonTheme.BlackInline}
-                        onClick={() => onClickPriceMinusCounter(Number(priceCounter))}
-                        style={{ width: 52, height: 52, padding: 0, marginLeft: 12 }}
-                      >
-                        <Image src={IconRectangle.src} alt='icon_rectangle' width={16} height={2} />
-                      </BasicButton>
-                      <BasicButton
-                        theme={BasicButtonTheme.BlackInline}
-                        onClick={() => onClickPricePlusCounter(Number(priceCounter))}
-                        style={{ width: 52, height: 52, padding: 0, marginLeft: 8 }}
-                      >
-                        <Image src={IconUnion.src} alt='icon_union' width={16} height={16} />
-                      </BasicButton>
-                    </div>
-                  </div>
-                </div>
-                <BasicButtonBox>
-                  <BasicButton
-                    disabled={disabled}
-                    theme={BasicButtonTheme.FailRounded}
-                    onClick={() => goToBuyOrder()}
-                    style={{ width: '100%' }}
-                  >매수 주문하기
-                  </BasicButton>
-                </BasicButtonBox>
-              </div>
-            </TabPane>
-          </TabContent>
-        </BottomSheet>
       </div>
     </Container>
   );

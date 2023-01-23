@@ -12,7 +12,7 @@ import { useRouter } from 'next/dist/client/router';
 
 const Container = styled.div`
   width: 100%;
-  height: 83vh;
+  height: 87vh;
   background-color: #F5F6F8;
   position: relative;
   overflow-x: hidden;

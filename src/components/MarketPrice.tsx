@@ -23,7 +23,7 @@ const Container = styled.div`
 
 const RowDayHeader = styled.div`
   width: 100%;
-  height: calc(100vh - 27vh);
+  height: calc(100vh - 20vh);
   overflow-y: scroll;
 `;
 
